@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Will you be my New Year's Kiss?</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      flex-direction: column;
+      background-color: #f9f9f9;
+    }
+    .button {
+      padding: 12px 24px;
+      font-size: 18px;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .yes-button {
+      background-color: #34D399; /* green */
+      margin-right: 10px;
+    }
+    .yes-button:hover {
+      background-color: #10B981;
+    }
+    .no-button {
+      background-color: #EF4444; /* red */
+    }
+    .no-button:hover {
+      background-color: #DC2626;
+    }
+    #mainImage {
+      max-width: 500px;  /* Keep the initial size of the first image */
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    iframe {
+      pointer-events: none; /* Prevents click interaction with the iframe */
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <!-- Initial image (puppy gif) -->
+    <div id="mainImage">
+      <iframe src="https://giphy.com/embed/2aw9gwZlltbdX92b4w" width="480" height="480" frameBorder="0" class="giphy-embed" allowFullScreen></iframe>
+    </div>
+    <h1 id="question">Will you be my New Year's Kiss?</h1>
+    <div id="buttons">
+      <button id="yesButton" class="button yes-button">Yes</button>
+      <button id="noButton" class="button no-button">No</button>
+    </div>
+  </div>
+
+  <script>
+    let noCount = 0;
+    let yesPressed = false;
+
+    const noButton = document.getElementById('noButton');
+    const yesButton = document.getElementById('yesButton');
+    const questionText = document.getElementById('question');
+    const mainImage = document.getElementById('mainImage');
+
+    // Handle No button click
+    noButton.addEventListener('click', () => {
+      noCount++;
+      noButton.textContent = getNoButtonText(noCount);
+    });
+
+    // Handle Yes button click
+    yesButton.addEventListener('click', () => {
+      yesPressed = true;
+      questionText.textContent = "I LOVE YOU SO SO SO SO SO MUCH!!!!!";
+
+      // Update to slightly smaller iframe (600x600)
+      const iframe = document.createElement('iframe');
+      iframe.setAttribute('src', 'https://giphy.com/embed/c76IJLufpNwSULPk77');
+      iframe.setAttribute('width', '600');  /* Slightly smaller width */
+      iframe.setAttribute('height', '600');  /* Slightly smaller height */
+      iframe.setAttribute('frameBorder', '0');
+      iframe.setAttribute('class', 'giphy-embed');
+      iframe.setAttribute('allowFullScreen', '');
+      iframe.style.pointerEvents = 'none';  /* Prevent click interaction */
+
+      mainImage.innerHTML = ''; // Clear the previous image
+      mainImage.appendChild(iframe);
+
+      document.getElementById('buttons').style.display = 'none'; // Hide the buttons
+    });
+
+    function getNoButtonText(count) {
+      const phrases = [
+        "No",
+        "BB Are you sure?",
+        "Really sure bb?",
+        "Think again bb!",
+        "Last chance bb!",
+        "bb why???",
+        "You promised bb!!!",
+        "Reconsider please bb!",
+        "Are you absolutely certain bb?",
+        "This could be a mistake bb!",
+        "I LOVE YOU so much bb!",
+        "Don't be so cold bb!",
+        "Change of heart bb?",
+        "Wouldn't you reconsider bb?",
+        "Is that your final answer bb?",
+        "You're breaking my heart bb :("
+      ];
+
+      return phrases[Math.min(count, phrases.length - 1)];
+    }
+  </script>
+</body>
+</html>
